@@ -29,8 +29,9 @@ flowchart LR
 2. Run `python3 demo_nonideal.py` for the intentional simulator-versus-backend difference.
 3. Run `python3 demo_full_matrix.py` for a dense 4×4 feedforward matrix.
 4. Run `python3 demo_recurrent.py` for the dense 8×8 input/output feedback matrix.
-5. Run `python3 -m unittest -v` to verify the toy HAL behavior.
-6. Edit `demo_experiment.json` to describe another logical use case.
+5. Open `analog_fabric_colab_demo.ipynb` in Google Colab for the guided, visual walkthrough. Upload the matching source ZIP when prompted.
+6. Run `python3 -m unittest -v` to verify the toy HAL behavior.
+7. Edit `demo_experiment.json` to describe another logical use case.
 
 ## Demos
 

@@ -1,0 +1,21 @@
+{
+  "name": "four_port_mixer",
+  "network": { "inputs": 4, "outputs": 4 },
+  "weights": [
+    { "source": 0, "destination": 2, "weight": 0.5 },
+    { "source": 1, "destination": 2, "weight": -0.25 },
+    { "source": 0, "destination": 3, "weight": 0.3 },
+    { "source": 1, "destination": 3, "weight": 0.2 },
+    { "source": 0, "destination": 1, "weight": 1.5 }
+  ],
+  "inputs": [
+    { "port": 0, "samples_v": [0.8], "sample_rate_hz": 1000.0 }
+  ],
+  "captures": [2],
+  "measurements": [
+    { "source": 0, "destination": 2, "stimulus_v": 0.8, "tolerance_v": 1e-9 },
+    { "source": 0, "destination": 3, "stimulus_v": 0.8, "tolerance_v": 1e-9 }
+  ],
+  "power_on": true,
+  "safe_stop": true
+}

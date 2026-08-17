@@ -1,0 +1,32 @@
+{
+  "name": "fully_connected_four_by_four",
+  "network": { "inputs": 4, "outputs": 4 },
+  "weights": [
+    { "source": 0, "destination": 0, "weight": 0.4 },
+    { "source": 1, "destination": 0, "weight": -0.1 },
+    { "source": 2, "destination": 0, "weight": 0.2 },
+    { "source": 3, "destination": 0, "weight": 0.0 },
+    { "source": 0, "destination": 1, "weight": 0.1 },
+    { "source": 1, "destination": 1, "weight": 0.3 },
+    { "source": 2, "destination": 1, "weight": -0.2 },
+    { "source": 3, "destination": 1, "weight": 0.5 },
+    { "source": 0, "destination": 2, "weight": -0.3 },
+    { "source": 1, "destination": 2, "weight": 0.4 },
+    { "source": 2, "destination": 2, "weight": 0.1 },
+    { "source": 3, "destination": 2, "weight": 0.2 },
+    { "source": 0, "destination": 3, "weight": 0.2 },
+    { "source": 1, "destination": 3, "weight": 0.0 },
+    { "source": 2, "destination": 3, "weight": -0.4 },
+    { "source": 3, "destination": 3, "weight": 0.3 }
+  ],
+  "inputs": [
+    { "port": 0, "samples_v": [0.5], "sample_rate_hz": 1000.0 },
+    { "port": 1, "samples_v": [-0.2], "sample_rate_hz": 1000.0 },
+    { "port": 2, "samples_v": [0.8], "sample_rate_hz": 1000.0 },
+    { "port": 3, "samples_v": [0.1], "sample_rate_hz": 1000.0 }
+  ],
+  "captures": [0, 1, 2, 3],
+  "measurements": [],
+  "power_on": false,
+  "safe_stop": false
+}

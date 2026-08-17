@@ -12,7 +12,8 @@ from security import AuthorizationError, AuthorizationPolicy, Role
 from service import HardwareService, JobState
 
 
-class DemoMemoryController:
+class PrototypeFabricMemoryController:
+    """Mock edge-memory programmer for the prototype compute fabric."""
     def __init__(self) -> None:
         self.writes: list[tuple[float, int, int]] = []
 
@@ -20,7 +21,8 @@ class DemoMemoryController:
         self.writes.append((value, row, col))
 
 
-class DemoRFSoC:
+class RFSoCTestSystem:
+    """Mock RFSoC test endpoint that sources and captures analog waveforms."""
     def __init__(self) -> None:
         self.source_waveform: Waveform | None = None
         self.output_enabled = False
@@ -42,7 +44,8 @@ class DemoRFSoC:
         self.output_enabled = False
 
 
-class DemoVoltageSource:
+class PrototypeBiasSupply:
+    """Mock shared bias supply for the prototype compute fabric."""
     def __init__(self) -> None:
         self.enabled = False
 
@@ -87,11 +90,11 @@ def main() -> None:
     print("shape:", f"{shape.inputs} inputs x {shape.outputs} outputs")
     print("warnings:", compiled.warnings or "none")
 
-    controller, rfsoc, bias = DemoMemoryController(), DemoRFSoC(), DemoVoltageSource()
+    controller, rfsoc, bias = PrototypeFabricMemoryController(), RFSoCTestSystem(), PrototypeBiasSupply()
     drivers = DriverRegistry()
-    drivers.register(MemoryControllerAdapter("demo-memory-controller", controller))
-    drivers.register(RFSoCAdapter("demo-rfsoc", rfsoc))
-    drivers.register(VoltageSourceAdapter("demo-bias-supply", bias))
+    drivers.register(MemoryControllerAdapter("prototype-fabric-memory", controller))
+    drivers.register(RFSoCAdapter("rfsoc-test-system", rfsoc))
+    drivers.register(VoltageSourceAdapter("prototype-bias-supply", bias))
     device = DeviceRegistry(
         shape,
         inputs=[PortAttachment(port, Capability.WAVEFORM_SOURCE, -1.0, 1.0, 1_000.0) for port in (0, 1)],
@@ -102,7 +105,7 @@ def main() -> None:
     service = HardwareService(program=fabric, driver_registry=drivers, device_registry=device, audit_log=JsonlAuditLog(audit_path), authorization_policy=policy)
     try:
         print("\n=== 3. HAL lowering ===")
-        print("edge-weight -> demo-memory-controller; waveform source/capture -> demo-rfsoc; output bias -> demo-bias-supply")
+        print("edge-weight -> prototype-fabric-memory; waveform source/capture -> rfsoc-test-system; output bias -> prototype-bias-supply")
 
         if request.power_on:
             print("\n=== 4. Queued power-on ===")

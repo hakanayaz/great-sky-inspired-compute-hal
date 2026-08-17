@@ -3,7 +3,7 @@ from pathlib import Path
 
 from audit import JsonlAuditLog
 from backends import DriverBackend, NonIdealDriverBackend, SimulatorBackend, compare_runs
-from demo import DemoMemoryController, DemoRFSoC, DemoVoltageSource
+from demo import PrototypeBiasSupply, PrototypeFabricMemoryController, RFSoCTestSystem
 from device_registry import DeviceRegistry, PortAttachment
 from drivers import Capability, DriverRegistry, MemoryControllerAdapter, RFSoCAdapter, VoltageSourceAdapter
 from experiment_api import load_experiment
@@ -13,11 +13,11 @@ from service import HardwareService
 
 def main() -> None:
     request = load_experiment(Path(__file__).with_name("demo_experiment.json"))
-    controller, rfsoc, bias = DemoMemoryController(), DemoRFSoC(), DemoVoltageSource()
+    controller, rfsoc, bias = PrototypeFabricMemoryController(), RFSoCTestSystem(), PrototypeBiasSupply()
     drivers = DriverRegistry()
-    drivers.register(MemoryControllerAdapter("demo-memory-controller", controller))
-    drivers.register(RFSoCAdapter("demo-rfsoc", rfsoc))
-    drivers.register(VoltageSourceAdapter("demo-bias-supply", bias))
+    drivers.register(MemoryControllerAdapter("prototype-fabric-memory", controller))
+    drivers.register(RFSoCAdapter("rfsoc-test-system", rfsoc))
+    drivers.register(VoltageSourceAdapter("prototype-bias-supply", bias))
     device = DeviceRegistry(
         request.shape,
         inputs=[PortAttachment(port, Capability.WAVEFORM_SOURCE, -1.0, 1.0, 1_000.0) for port in (0, 1)],

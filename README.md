@@ -1,8 +1,10 @@
-# Analog Fabric HAL Playground
+# RFSoC ↔ Prototype Compute Fabric HAL Playground
 
 A vertical-slice reference architecture for a programmable analog fabric: declarative experiments, compiler-style validation, private driver adaptation, safe queued control, measurement evidence, and simulator-versus-backend parity.
 
 > **Scope:** this is an educational toy HAL and architecture prototype—not a production instrument-control system and not a claim of real hardware integration.
+
+> **Positioning:** this is an independent exercise inspired by public descriptions of Great Sky's physics-driven AI-hardware direction. It uses generic names such as *prototype compute fabric* rather than claiming knowledge of, access to, or affiliation with any proprietary Great Sky device. [Great Sky's public overview](https://www.greatsky.ai/about) describes the company at a high level.
 
 ## At a glance
 
@@ -34,7 +36,7 @@ flowchart LR
 
 ### Demo 1 — nominal parity
 
-The bundled `four_port_mixer` experiment demonstrates:
+The bundled `rfsoc_prototype_fabric_experiment` demonstrates an RFSoC test system sourcing and capturing analog waveforms around a prototype compute fabric:
 
 - queued power-on and safe-stop;
 - input waveform dispatch and output capture through logical ports;

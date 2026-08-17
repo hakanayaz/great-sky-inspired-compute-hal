@@ -1,5 +1,5 @@
 {
-  "name": "four_port_mixer",
+  "name": "rfsoc_prototype_fabric_experiment",
   "network": { "inputs": 4, "outputs": 4 },
   "weights": [
     { "source": 0, "destination": 2, "weight": 0.5 },

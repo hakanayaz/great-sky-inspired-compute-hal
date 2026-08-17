@@ -2,15 +2,15 @@ import unittest
 from time import sleep
 from tempfile import TemporaryDirectory
 
-from analog_fabric import Compiler, Edge, FabricError, FabricProgram, NetworkShape, OutputConfig, Simulator, Waveform
-from audit import JsonlAuditLog
-from backends import SimulatorBackend, compare_runs
-from experiment_api import ExperimentRequest
-from device_registry import DeviceRegistry, PortAttachment
-from service import HardwareService, InputWaveformRequest, JobState, LifecycleState, MeasurementRequest, VerificationState, WeightUpdate
-from drivers import AWGScopeAdapter, DriverRegistry, MemoryControllerAdapter, RFSoCAdapter, VoltageSourceAdapter
-from drivers import Capability
-from security import AuthorizationError, AuthorizationPolicy, Role
+from analog_fabric_hal.analog_fabric import Compiler, Edge, FabricError, FabricProgram, NetworkShape, OutputConfig, Simulator, Waveform
+from analog_fabric_hal.audit import JsonlAuditLog
+from analog_fabric_hal.backends import SimulatorBackend, compare_runs
+from analog_fabric_hal.experiment_api import ExperimentRequest
+from analog_fabric_hal.device_registry import DeviceRegistry, PortAttachment
+from analog_fabric_hal.service import HardwareService, InputWaveformRequest, JobState, LifecycleState, MeasurementRequest, VerificationState, WeightUpdate
+from analog_fabric_hal.drivers import AWGScopeAdapter, DriverRegistry, MemoryControllerAdapter, RFSoCAdapter, VoltageSourceAdapter
+from analog_fabric_hal.drivers import Capability
+from analog_fabric_hal.security import AuthorizationError, AuthorizationPolicy, Role
 
 
 class FabricTests(unittest.TestCase):

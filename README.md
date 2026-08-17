@@ -25,12 +25,23 @@ flowchart LR
 
 ## Quick start
 
-1. Run `python3 demo.py` for the nominal 4×4 experiment and expected backend parity match.
-2. Run `python3 demo_nonideal.py` for the intentional simulator-versus-backend difference.
-3. Run `python3 demo_full_matrix.py` for a dense 4×4 feedforward matrix.
-4. Run `python3 demo_recurrent.py` for the dense 8×8 input/output feedback matrix.
-5. Run `python3 -m unittest -v` to verify the toy HAL behavior.
-6. Edit `demo_experiment.json` to describe another logical use case.
+This project uses only the Python standard library. From the repository root:
+
+1. Run `PYTHONPATH=src python3 examples/demo.py` for the nominal 4×4 experiment and expected backend parity match.
+2. Run `PYTHONPATH=src python3 examples/demo_nonideal.py` for the intentional simulator-versus-backend difference.
+3. Run `PYTHONPATH=src python3 examples/demo_full_matrix.py` for a dense 4×4 feedforward matrix.
+4. Run `PYTHONPATH=src python3 examples/demo_recurrent.py` for the dense 8×8 input/output feedback matrix.
+5. Run `PYTHONPATH=src python3 -m unittest discover -s tests -v` to verify the toy HAL behavior.
+6. Edit `examples/demo_experiment.json` to describe another logical use case.
+
+## Repository layout
+
+```text
+src/analog_fabric_hal/  reusable HAL, compiler, simulator, registries, and adapters
+examples/               runnable demonstrations and declarative JSON use cases
+tests/                  automated behavioral checks
+README.md               architecture, assumptions, risks, and roadmap
+```
 
 ## Demos
 
@@ -47,15 +58,15 @@ The bundled `rfsoc_prototype_fabric_experiment` demonstrates an RFSoC test syste
 
 ### Demo 2 — expected nonideal parity difference
 
-`python3 demo_nonideal.py` applies a deterministic profile of `gain = 0.92` and `offset = 0.01 V` to the driver-backed observations. The expected simulator values of `0.4000 V` and `0.2400 V` become approximately `0.3780 V` and `0.2308 V`. A parity mismatch is the correct outcome: it represents a calibration or regression signal, not a queue, authorization, or dispatch failure.
+`python3 examples/demo_nonideal.py` applies a deterministic profile of `gain = 0.92` and `offset = 0.01 V` to the driver-backed observations. The expected simulator values of `0.4000 V` and `0.2400 V` become approximately `0.3780 V` and `0.2308 V`. A parity mismatch is the correct outcome: it represents a calibration or regression signal, not a queue, authorization, or dispatch failure.
 
 ### Demo 3 — fully connected matrix fabric
 
-`python3 demo_full_matrix.py` shows the most direct fully connected use case: all 16 edges of a 4-input, 4-output fabric are programmed as a weight matrix, four analog input values are applied, and the simulator renders the resulting matrix-vector output. It is the clearest demonstration that the graph representation can express a dense analog neural layer.
+`python3 examples/demo_full_matrix.py` shows the most direct fully connected use case: all 16 edges of a 4-input, 4-output fabric are programmed as a weight matrix, four analog input values are applied, and the simulator renders the resulting matrix-vector output. It is the clearest demonstration that the graph representation can express a dense analog neural layer.
 
 ### Demo 4 — 8×8 input/output feedback fabric
 
-`python3 demo_recurrent.py` presents the connectivity view in the supplied matrix example. It combines `in1..in4` and `out1..out4` into eight logical nodes, then programs every matrix entry: 64 edges in total. Each feedback step applies all four blocks—input-to-input, output-to-input feedback, input-to-output feedforward, and output-to-output. Negative paths are labeled inhibitory and positive paths excitatory. The demo is an honest discrete-time, brain-inspired teaching model; it is not a biological brain model or PDE solver.
+`python3 examples/demo_recurrent.py` presents the connectivity view in the supplied matrix example. It combines `in1..in4` and `out1..out4` into eight logical nodes, then programs every matrix entry: 64 edges in total. Each feedback step applies all four blocks—input-to-input, output-to-input feedback, input-to-output feedforward, and output-to-output. Negative paths are labeled inhibitory and positive paths excitatory. The demo is an honest discrete-time, brain-inspired teaching model; it is not a biological brain model or PDE solver.
 
 | Matrix convention | Meaning |
 |---|---|
@@ -70,7 +81,7 @@ The ordinary HAL fabric remains a directional `inputs × outputs` graph. Demo 4 
 
 ## Declarative experiment API
 
-`demo_experiment.json` is the high-level use-case request. It states **what** experiment is desired; it does not expose driver names, cables, or safety sequencing.
+`examples/demo_experiment.json` is the high-level use-case request. It states **what** experiment is desired; it does not expose driver names, cables, or safety sequencing.
 
 | Field | User-facing meaning |
 |---|---|
@@ -140,15 +151,15 @@ The current fixed contracts are `VoltageSource`, `Memory_controller`, `AWG`, `Sc
 
 | Module | Responsibility |
 |---|---|
-| `analog_fabric.py` | Arbitrary-shape graph, compiler validation, IR rendering, sampled analog simulator. |
-| `experiment_api.py` | Declarative JSON experiment request and typed conversion. |
-| `service.py` | Serialized jobs, batch results, measurement evidence, lifecycle, audit integration, role admission. |
-| `drivers.py` | Fixed driver contracts and capability adapters. |
-| `device_registry.py` | Private attachments, limits, bias metadata, and safety-plan metadata. |
-| `security.py` | Toy role-based admission policy. |
-| `audit.py` | Durable JSON-lines audit events. |
-| `backends.py` | Shared simulator/driver backend contract and parity comparison. |
-| `demo_recurrent.py` | Eight-node, 64-edge feedback matrix demonstration with an inspectable state trace. |
+| `src/analog_fabric_hal/analog_fabric.py` | Arbitrary-shape graph, compiler validation, IR rendering, sampled analog simulator. |
+| `src/analog_fabric_hal/experiment_api.py` | Declarative JSON experiment request and typed conversion. |
+| `src/analog_fabric_hal/service.py` | Serialized jobs, batch results, measurement evidence, lifecycle, audit integration, role admission. |
+| `src/analog_fabric_hal/drivers.py` | Fixed driver contracts and capability adapters. |
+| `src/analog_fabric_hal/device_registry.py` | Private attachments, limits, bias metadata, and safety-plan metadata. |
+| `src/analog_fabric_hal/security.py` | Toy role-based admission policy. |
+| `src/analog_fabric_hal/audit.py` | Durable JSON-lines audit events. |
+| `src/analog_fabric_hal/backends.py` | Shared simulator/driver backend contract and parity comparison. |
+| `examples/demo_recurrent.py` | Eight-node, 64-edge feedback matrix demonstration with an inspectable state trace. |
 
 ## Roadmap
 

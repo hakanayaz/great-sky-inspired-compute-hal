@@ -2,14 +2,14 @@
 from pathlib import Path
 from time import sleep
 
-from analog_fabric import Compiler, FabricProgram, Waveform, render_ir
-from audit import JsonlAuditLog
-from backends import DriverBackend, SimulatorBackend, compare_runs
-from device_registry import DeviceRegistry, PortAttachment
-from drivers import Capability, DriverRegistry, MemoryControllerAdapter, RFSoCAdapter, VoltageSourceAdapter
-from experiment_api import load_experiment
-from security import AuthorizationError, AuthorizationPolicy, Role
-from service import HardwareService, JobState
+from analog_fabric_hal.analog_fabric import Compiler, FabricProgram, Waveform, render_ir
+from analog_fabric_hal.audit import JsonlAuditLog
+from analog_fabric_hal.backends import DriverBackend, SimulatorBackend, compare_runs
+from analog_fabric_hal.device_registry import DeviceRegistry, PortAttachment
+from analog_fabric_hal.drivers import Capability, DriverRegistry, MemoryControllerAdapter, RFSoCAdapter, VoltageSourceAdapter
+from analog_fabric_hal.experiment_api import load_experiment
+from analog_fabric_hal.security import AuthorizationError, AuthorizationPolicy, Role
+from analog_fabric_hal.service import HardwareService, JobState
 
 
 class PrototypeFabricMemoryController:

@@ -11,8 +11,8 @@ from dataclasses import dataclass
 import json
 from pathlib import Path
 
-from analog_fabric import Edge, FabricError, NetworkShape, Waveform
-from service import InputWaveformRequest, MeasurementRequest, WeightUpdate
+from .analog_fabric import Edge, FabricError, NetworkShape, Waveform
+from .service import InputWaveformRequest, MeasurementRequest, WeightUpdate
 
 
 @dataclass(frozen=True)

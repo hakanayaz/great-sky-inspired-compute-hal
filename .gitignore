@@ -1,4 +1,6 @@
 __pycache__/
 *.py[cod]
 *.jsonl
+.egg-info/
+.venv/
 .DS_Store

@@ -10,9 +10,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Protocol
 
-from analog_fabric import Compiler, Edge, FabricError, FabricProgram, Simulator, Waveform
-from experiment_api import ExperimentRequest
-from service import HardwareService, JobState
+from .analog_fabric import Compiler, Edge, FabricError, FabricProgram, Simulator, Waveform
+from .experiment_api import ExperimentRequest
+from .service import HardwareService, JobState
 
 
 @dataclass(frozen=True)

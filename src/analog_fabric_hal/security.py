@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from enum import Enum
 
-from analog_fabric import FabricError
+from .analog_fabric import FabricError
 
 
 class Role(str, Enum):

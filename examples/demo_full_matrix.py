@@ -1,9 +1,9 @@
 """Demo 3: a fully connected 4x4 analog matrix-vector operation."""
 from pathlib import Path
 
-from analog_fabric import FabricProgram, render_ir
-from backends import SimulatorBackend
-from experiment_api import load_experiment
+from analog_fabric_hal.analog_fabric import FabricProgram, render_ir
+from analog_fabric_hal.backends import SimulatorBackend
+from analog_fabric_hal.experiment_api import load_experiment
 
 
 def main() -> None:

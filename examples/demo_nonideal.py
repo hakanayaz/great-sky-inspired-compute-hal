@@ -1,14 +1,14 @@
 """Demo 2: use backend parity to expose deterministic physical nonidealities."""
 from pathlib import Path
 
-from audit import JsonlAuditLog
-from backends import DriverBackend, NonIdealDriverBackend, SimulatorBackend, compare_runs
+from analog_fabric_hal.audit import JsonlAuditLog
+from analog_fabric_hal.backends import DriverBackend, NonIdealDriverBackend, SimulatorBackend, compare_runs
 from demo import PrototypeBiasSupply, PrototypeFabricMemoryController, RFSoCTestSystem
-from device_registry import DeviceRegistry, PortAttachment
-from drivers import Capability, DriverRegistry, MemoryControllerAdapter, RFSoCAdapter, VoltageSourceAdapter
-from experiment_api import load_experiment
-from security import AuthorizationPolicy, Role
-from service import HardwareService
+from analog_fabric_hal.device_registry import DeviceRegistry, PortAttachment
+from analog_fabric_hal.drivers import Capability, DriverRegistry, MemoryControllerAdapter, RFSoCAdapter, VoltageSourceAdapter
+from analog_fabric_hal.experiment_api import load_experiment
+from analog_fabric_hal.security import AuthorizationPolicy, Role
+from analog_fabric_hal.service import HardwareService
 
 
 def main() -> None:

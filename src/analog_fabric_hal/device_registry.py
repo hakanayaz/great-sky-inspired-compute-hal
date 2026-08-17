@@ -10,8 +10,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from analog_fabric import FabricError, NetworkShape, Waveform
-from drivers import Capability
+from .analog_fabric import FabricError, NetworkShape, Waveform
+from .drivers import Capability
 
 
 @dataclass(frozen=True)

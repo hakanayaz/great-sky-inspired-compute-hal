@@ -23,11 +23,11 @@ from threading import Event, Lock, Thread
 from typing import Callable
 from uuid import uuid4
 
-from analog_fabric import Compiler, Edge, FabricError, FabricProgram, Simulator, Waveform
-from audit import AuditEvent, JsonlAuditLog
-from drivers import DriverRegistry
-from device_registry import DeviceRegistry
-from security import AuthorizationPolicy
+from .analog_fabric import Compiler, Edge, FabricError, FabricProgram, Simulator, Waveform
+from .audit import AuditEvent, JsonlAuditLog
+from .drivers import DriverRegistry
+from .device_registry import DeviceRegistry
+from .security import AuthorizationPolicy
 
 
 class JobState(str, Enum):

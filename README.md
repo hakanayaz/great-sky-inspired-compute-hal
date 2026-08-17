@@ -161,6 +161,14 @@ The current fixed contracts are `VoltageSource`, `Memory_controller`, `AWG`, `Sc
 | `src/analog_fabric_hal/backends.py` | Shared simulator/driver backend contract and parity comparison. |
 | `examples/demo_recurrent.py` | Eight-node, 64-edge feedback matrix demonstration with an inspectable state trace. |
 
+## Scaling from one device to many
+
+The logical API and compiler IR can remain the same as the system grows. The change is below the HAL boundary: replace the single shared queue with a private registry of physical devices, each with its own worker, device-specific safety plan, calibration state, permissions, and audit stream.
+
+For an experiment that needs more than one device, a coordinator first reserves the required devices, then submits work to their workers in a safe order. Independent devices may run in parallel; operations targeting the same device remain serialized. Cross-device experiments additionally need an explicit synchronization policy for clocks, triggers, waveform timing, data movement, failure handling, and safe-stop propagation.
+
+This keeps callers focused on logical networks and experiments while the HAL controls physical placement, contention, and recovery.
+
 ## Roadmap
 
 1. Enforce device-specific power ordering, shared-bias limits, and confirmed safe-stop procedures.
@@ -168,7 +176,3 @@ The current fixed contracts are `VoltageSource`, `Memory_controller`, `AWG`, `Sc
 3. Add real vendor-driver backends, calibration data, waveform analysis, and hardware-in-the-loop parity tests.
 4. Expose the service through HTTP or gRPC with durable job storage and recovery behavior.
 5. Add one worker per physical device plus a coordinator for multi-device experiments.
-
-## Deliberate boundaries
-
-The MVP does not yet provide real vendor SDK control, live streaming, real hardware readback, safety-certified interlocks, identity authentication, per-resource authorization, production telemetry, waveform SNR/drift analysis, durable job recovery, or multi-device orchestration. These are explicit next-stage work, not hidden assumptions.

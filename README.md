@@ -1,10 +1,10 @@
-# RFSoC ↔ Prototype Compute Fabric HAL Playground
+# Toy HAL Playground for GreatSky AI
 
-A vertical-slice reference architecture for a programmable analog fabric: declarative experiments, compiler-style validation, private driver adaptation, safe queued control, measurement evidence, and simulator-versus-backend parity.
+This is a toy problem for representing a real problem GreatSky facing which creating Hardware abstraction layer(HAL) for their infrastructure to capture the goal.
 
-> **Scope:** this is an educational toy HAL and architecture prototype—not a production instrument-control system and not a claim of real hardware integration.
+> **Scope:** This is an educational toy HAL and architecture prototype—not a production instrument-control system and not a claim of real hardware integration.
 
-> **Positioning:** this is an independent exercise inspired by public descriptions of Great Sky's physics-driven AI-hardware direction. It uses generic names such as *prototype compute fabric* rather than claiming knowledge of, access to, or affiliation with any proprietary Great Sky device. [Great Sky's public overview](https://www.greatsky.ai/about) describes the company at a high level.
+> **Positioning:** This is an independent exercise inspired by public descriptions of Great Sky's physics-driven AI-hardware direction. It uses generic names such as *prototype compute fabric* rather than claiming knowledge of, access to, or affiliation with any proprietary Great Sky device. [Great Sky's public overview](https://www.greatsky.ai/about) describes the company at a high level.
 
 ## At a glance
 
